@@ -27,7 +27,7 @@ int main(int argc, char *argv[]) {
     }
     while (fgets(buffer, 400, in)) {
         token = strtok(buffer, delimit);
-        if (!token){
+        if (!token) {
             if (in != stdin) {
                 fclose(in);
             }
@@ -43,60 +43,8 @@ int main(int argc, char *argv[]) {
         ausgabe = ausgabe * 2;
         printf("%d\n", ausgabe);
     }
-
-
-
-
-
-/*
-    if(argc > 3 || argc == 1)
-    {
-        fprintf(stderr, "Usage: %s [<file>]\n", argv[0]);
-        exit(EXIT_FAILURE);
+    if (in != stdin) {
+        fclose(in);
     }
-    if(argc == 2)
-    {
-        if (isalpha(*argv[1]) != 0) {
-            in = fopen(argv[1], "r");
-            if (!in) {
-                perror(argv[0]);
-                exit(EXIT_FAILURE);
-            } else {
-                fgets(buffer, 400, in);
-                token = strtok(buffer, delimit);
-                countnum = atoi(token);
-                if (countnum == NULL) {
-                    fprintf(stderr, "Please only use alphanumeric characters in %s\n", argv[1]);
-                    exit(EXIT_FAILURE);
-                }
-                token = strtok(NULL, delimit);
-                maxnum = atoi(token);
-                if (maxnum == NULL) {
-                    fprintf(stderr, "Please only use alphanumeric characters in %s\n", argv[1]);
-                    exit(EXIT_FAILURE);
-                }
-            }
-        }
-        else {
-            countnum = atoi(argv[1]);
-        }
-        srand(time(NULL));   // Initialization, should only be called once.
-        for (int i = 0; i < countnum; i++) {
-            ausgabe = rand() % maxnum;  // Returns a pseudo-random integer between 0 and RAND_MAX.
-            printf("%d\n",ausgabe);
-        }
-    }
-
-    if (argc == 3){
-        countnum = atoi(argv[1]);
-        maxnum = atoi(argv[2]);
-        srand(time(NULL));   // Initialization, should only be called once.
-        for (int i = 0; i < countnum; i++) {
-            ausgabe = rand() % maxnum;  // Returns a pseudo-random integer between 0 and RAND_MAX.
-            printf("%d\n",ausgabe);
-        }
-    }
-    */
-/* Here: Read from in with (e.g.) fgets(), ... */
-
+    exit(EXIT_SUCCESS);
 }
