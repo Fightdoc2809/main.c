@@ -5,52 +5,48 @@
 #include <ctype.h>
 
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
     FILE *in = stdin;
     int num, ausgabe;
     char buffer[400];
     char delimit[] = ",:;\n";
-    char * token;
+    char *token;
 
-    if (argc > 2)
-    {
+    if (argc > 2) {
         fprintf(stderr, "Bitte Maximal 2 Argumente angeben");
         exit(EXIT_FAILURE);
     }
 
+    if (argc == 2) {
 
-    if(argc == 2)
-    {
-        if (isalpha(*argv[1]) != 0) {
-            in = fopen(argv[1], "r");
-            if (!in) {
-                perror(argv[0]);
-                exit(EXIT_FAILURE);
-            }
+        in = fopen(argv[1], "r");
+        if (!in) {
+            perror(argv[0]);
+            exit(EXIT_FAILURE);
         }
-        else{
-            ausgabe = in;
-            if (ausgabe == NULL){
-                fprintf(stderr, "Please only use alphanumeric characters in %s\n", argv[1]);
-                exit(EXIT_FAILURE);
-            }
-            while (fgets(buffer, 400, in)){
-                token = strtok(buffer, delimit);
-                ausgabe = atoi(buffer);
-                if (isalpha(*token) != 0)
-                {
-                    fprintf(stderr, "Bitte nur Zahlen in Datei verwenden");
-                    exit(EXIT_FAILURE);
-                }
-                ausgabe = ausgabe*2;
-                printf("%d\n",ausgabe);
-            }
-            ausgabe = ausgabe*2;
-            printf("%d\n",ausgabe);
-        }
-
     }
+    while (fgets(buffer, 400, in)) {
+        token = strtok(buffer, delimit);
+        if (!token){
+            if (in != stdin) {
+                fclose(in);
+            }
+            exit(EXIT_SUCCESS);
+        }
+        ausgabe = atoi(buffer);
+        /*
+        if (isalpha(*token) != 0) {
+            fprintf(stderr, "Bitte nur Zahlen in Datei verwenden");
+            exit(EXIT_FAILURE);
+        }
+        */
+        ausgabe = ausgabe * 2;
+        printf("%d\n", ausgabe);
+    }
+
+
+
+
 
 /*
     if(argc > 3 || argc == 1)
@@ -101,10 +97,6 @@ int main(int argc, char *argv[])
         }
     }
     */
-    /* Here: Read from in with (e.g.) fgets(), ... */
-    if(in!=stdin)
-    {
-        fclose(in);
-    }
-    exit(EXIT_SUCCESS);
+/* Here: Read from in with (e.g.) fgets(), ... */
+
 }
