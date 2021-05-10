@@ -34,12 +34,6 @@ int main(int argc, char *argv[]) {
             exit(EXIT_SUCCESS);
         }
         ausgabe = atoi(buffer);
-        /*
-        if (isalpha(*token) != 0) {
-            fprintf(stderr, "Bitte nur Zahlen in Datei verwenden");
-            exit(EXIT_FAILURE);
-        }
-        */
         ausgabe = ausgabe * 2;
         printf("%d\n", ausgabe);
     }
